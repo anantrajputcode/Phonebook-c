@@ -5,20 +5,24 @@ int main()
     char name[50][50] = {"Anant", "Pushkar", "Sanjana", "Tanish", "Anshit"};
     unsigned long number[50] = {1234567890, 2345678901, 3456789012, 4567890123, 5678901234};
     char email [50][50] = {"a@gamil.com", "b@gmail.com", "c@gmail.com", "d@gmail.com" ,"e@gmail.com"};
-    int total_contacts = 5;
-    int new;
-    while (choice != 4)
+    int pre_def = 5;
+    int new = 0;
+    int total_contacts;
+    total_contacts = pre_def + new;
+    while (choice != 5)
     {
         printf("welcome\n");
         printf("--------\n");
         printf("1.view pre fed data\n");
         printf("2.add new contact\n");
         printf("3.search by number\n");
-        printf("4. exit\n");
+        printf("4. search by name");
+        printf("5. exit\n");
         printf("enter your choice:-");
         scanf("%d", &choice);
         if (choice == 1)
-        {
+        {   
+            total_contacts = pre_def + new;
             printf("s.no\tname\t\tph.no\t\t\temail\n");
             for (int i = 0; i < total_contacts; i++ )
             {
@@ -30,8 +34,8 @@ int main()
         {
             printf("enter the no of contacts to add:-");
             scanf("%d", &new);
-            
-            for (int i = total_contacts; i < total_contacts + new; i++)
+            total_contacts = pre_def + new;
+            for (int i = pre_def; i < total_contacts + new; i++)
             {
                 printf("enter name of %dth contact: ", i + 1);
                 scanf("%s", name[i]);
@@ -39,16 +43,33 @@ int main()
                 scanf("%lu", &number[i]);
                 printf("enter the email of %dth contact: ", i + 1);
                 scanf("%s", email[i]);
-            
             }
+            
             printf("s.no\tname\t\tph.no\t\t\temail\n");
             for (int i = 0; i < total_contacts + new; i++ )
             {
                 printf("%d\t%s\t\t%lu\t\t%s\n", i +1, name[i], number[i], email[i]);
             }
+        }
+        else if (choice == 3)
+        {
+            long unsigned check;
+            printf("enter the phone number of contact:");
+            scanf("%lu", &check);
             
-
-
+            for (int i = 0; i < pre_def + new; i++)
+            {
+                if (check == number[i])
+                {
+                    printf("s.no\tname\t\tph.no\t\t\temail\n");
+                    printf("%d\t%s\t\t%lu\t\t%s\n", i +1, name[i], number[i], email[i]);
+                   
+                }
+                else
+                {
+                    printf("no result found");
+                }
+            }
         }
 
     }
