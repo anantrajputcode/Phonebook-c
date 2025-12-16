@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 int main()
 {
     int choice = 0;
@@ -16,7 +17,7 @@ int main()
         printf("1.view pre fed data\n");
         printf("2.add new contact\n");
         printf("3.search by number\n");
-        printf("4. search by name");
+        printf("4. search by name\n");
         printf("5. exit\n");
         printf("enter your choice:-");
         scanf("%d", &choice);
@@ -35,7 +36,7 @@ int main()
             printf("enter the no of contacts to add:-");
             scanf("%d", &new);
             total_contacts = pre_def + new;
-            for (int i = pre_def; i < total_contacts + new; i++)
+            for (int i = pre_def; i < pre_def + new; i++)
             {
                 printf("enter name of %dth contact: ", i + 1);
                 scanf("%s", name[i]);
@@ -46,7 +47,7 @@ int main()
             }
             
             printf("s.no\tname\t\tph.no\t\t\temail\n");
-            for (int i = 0; i < total_contacts + new; i++ )
+            for (int i = 0; i < pre_def+ new; i++ )
             {
                 printf("%d\t%s\t\t%lu\t\t%s\n", i +1, name[i], number[i], email[i]);
             }
@@ -63,13 +64,36 @@ int main()
                 {
                     printf("s.no\tname\t\tph.no\t\t\temail\n");
                     printf("%d\t%s\t\t%lu\t\t%s\n", i +1, name[i], number[i], email[i]);
+                    break;
                    
                 }
-                else
+                else if (i == pre_def + new - 1)
                 {
-                    printf("no result found");
+                    printf("no result found\n");
                 }
             }
+        }
+        else if(choice == 4)
+        {
+            char check[50];
+            printf("enter the name of contact: ");
+            scanf("%s", check);
+            for (int i = 0; i < total_contacts; i++)
+            if ((strcmp(check, name[i])) == 0)
+            {
+                printf("s.no\tname\t\tph.no\t\t\temail\n");
+                printf("%d\t%s\t\t%lu\t\t%s\n", i +1, name[i], number[i], email[i]);
+                break;
+            }
+            else if (i == pre_def + new - 1)
+            {
+                printf("no result found\n");
+            }
+        }
+        else if (choice == 5)
+        {   
+            printf("exited the system successfully.");
+            break;
         }
 
     }
